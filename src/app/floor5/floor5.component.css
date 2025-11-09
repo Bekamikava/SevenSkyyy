@@ -1,0 +1,367 @@
+/* ===================================================== */
+/* Base reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:host {
+    margin-top: 65px;
+  display: block;
+  min-height: 100vh;
+  background: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=80")
+    no-repeat center center/cover;
+  padding: 40px 20px;
+  font-family: "Arial", sans-serif;
+  color: #fff;
+}
+
+/* ===================================================== */
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ===================================================== */
+/* Cards grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* თავიდან 2 card გვერდიგვერდ */
+  gap: 30px;
+  justify-items: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03); /* ანიმაცია hover */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+  width: 100%;
+  height: auto; /* არასდროს გაწელოს */
+  max-height: 250px;
+  object-fit: cover; /* შენარჩუნებულია პროპორციები */
+  display: block;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-content p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.btn-details {
+  display: inline-block;
+  width: 100%;
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-details:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+/* ===================================================== */
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Modal container */
+.modal {
+  background: #fff;
+  width: 70%;
+  max-width: 900px;
+  max-height: 80vh;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: modalFadeIn 0.35s ease;
+  position: relative;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal image */
+
+.modal-image {
+  width: 100%;
+  height: auto; /* სიმაღლე ავტომატურად */
+  max-height: 50vh; /* მაქსიმუმ ეკრანის 50% */
+  object-fit: contain; /* ფოტო მთლიანად ჩანს, არ იჭრება */
+  display: block;
+}
+
+/* Modal body (text content) */
+.modal-body {
+  padding: 25px 30px;
+  overflow-y: auto; /* scroll მხოლოდ საჭიროებისას */
+  flex: 1;
+}
+
+.modal-body h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.modal-body p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+  background: white;
+}
+
+/* ===================================================== */
+/* Responsive */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .cards-grid {
+    grid-template-columns: 1fr; /* stacked 1 card */
+  }
+  .modal {
+    width: 85%;
+  }
+  .modal-image {
+    max-height: 45vh;
+  }
+  h1 {
+    font-size: 32px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .card-image {
+    max-height: 200px;
+  }
+  .modal {
+    width: 95%;
+  }
+  .modal-image {
+    max-height: 35vh;
+  }
+  h1 {
+    font-size: 28px;
+  }
+}
+
+/* Extra small */
+@media (max-width: 480px) {
+  :host {
+    padding: 20px 15px;
+  }
+  .card-image {
+    max-height: 150px;
+  }
+  .modal-image {
+    max-height: 30vh;
+  }
+  .modal-body {
+    padding: 15px 20px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+}
+/* ===== წინა კოდი უცვლელი რჩება ===== */
+
+/* ← ᲐᲮᲐᲚᲘ: Zoom-ისთვის */
+.modal-image {
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  object-fit: contain;
+  display: block;
+  
+  /* ← ᲐᲮᲐᲚᲘ ხაზები: */
+  cursor: zoom-in;
+  transition: transform 0.1s ease-out;
+  transform-origin: center center;
+}
+
+/* ← ᲐᲮᲐᲚᲘ: Zoom-ში cursor შეცვლა */
+.modal-image:active {
+  cursor: zoom-out;
+}
+
+/* ← ᲐᲮᲐᲚᲘ: Modal header scroll-ისთვის */
+.modal-header {
+  position: relative;
+  overflow: auto; /* scroll როცა ძალიან გადიდდება */
+  max-height: 60vh;
+}
+.Mine {
+  font-size: 48px;
+  color: #f5f5f5;
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+
+  /* ფონზე ნახევრად გამჭვირვალე მუქი ზოლი */
+  background: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  padding: 15px 40px;
+  border-radius: 12px;
+
+  /* სინათლის ელფერი ტექსტზე */
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(0, 255, 200, 0.2),
+    1px 1px 3px rgba(0, 0, 0, 0.8);
+
+  /* გამოჩენის ნაზი ანიმაცია */
+  animation: fadeInDown 1s ease;
+}
+
+/* გამოჩენის ეფექტის ანიმაცია */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* მობილურის ადაპტაცია */
+@media (max-width: 768px) {
+  .Mine {
+    font-size: 32px;
+    padding: 10px 25px;
+  }
+}
+.modal-image {
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  object-fit: contain;
+  display: block;
+  cursor: zoom-in;
+  transition: transform 0.1s ease-out;
+  transform-origin: center center;
+  
+  /* ← ᲐᲮᲐᲚᲘ: Touch events-ისთვის */
+  touch-action: none; /* default touch behavior გამორთვა */
+  user-select: none; /* text selection გამორთვა */
+  -webkit-user-select: none;
+}
+
+.modal-header {
+  position: relative;
+  overflow: auto;
+  max-height: 60vh;
+  
+  /* ← ᲐᲮᲐᲚᲘ: smooth scrolling mobile-ზე */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ← ᲐᲮᲐᲚᲘ: Mobile zoom hint */
+@media (max-width: 768px) {
+  .modal-image::after {
+    content: '🔍 Pinch to zoom';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    animation: hintFade 3s ease-in-out;
+  }
+}
+
+@keyframes hintFade {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}

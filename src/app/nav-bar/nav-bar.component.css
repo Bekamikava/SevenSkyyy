@@ -1,0 +1,188 @@
+.navbar {
+  background-color: rgba(220, 220, 220, 0.959); /* თეთრი გამჭვირვალე */
+  backdrop-filter: blur(10px); /* option: ლამაზი დაბლარი */
+  padding: 10px 30px; /* გაზრდილი padding */
+  height: 90px; /* განსაზღვრული სიმაღლე */
+  
+}
+.right-side {
+  transition: background 0.3s ease;
+}
+
+/* ჰაილაითი background–ის მეშვეობით */
+.right-side.highlight {
+  background: linear-gradient(135deg, #ffcf33 0%, #ff7a18 100%);
+}
+
+.navbar a {
+  color:black; /* ტექსტი თეთრად */
+}
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999; 
+}
+.navbar a {
+  color: black; 
+  font-size: 18px; 
+  font-weight: 500; 
+  text-decoration: none; 
+  transition: color 0.3s ease, transform 0.3s ease; 
+}
+
+.navbar a:hover {
+  color: #007bff;
+  transform: scale(1.1); 
+}
+
+
+.navbar-brand img {
+  width: 50px; 
+  height: auto;
+  margin-right: 10px; 
+}
+
+
+.navbar:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
+}
+
+
+.navbar-collapse {
+  text-align: center; 
+}
+
+.navbar-toggler-icon {
+  color: white; 
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .navbar-nav {
+    margin-top: 25px; /* Mobile view - links spacing */
+    display: flex;
+  
+  }
+
+  .navbar a {
+    font-size: 16px; /* Mobile view - smaller text */
+  }
+}
+.navbar-nav {
+  margin-left: auto;
+ /* გადატანა მარჯვნივ */
+}
+.navbar-nav .nav-item {
+  margin-left: 20px; /* სხვა ღილაკებს შორის დისტანცია */
+}
+
+.navbar-nav .nav-item:first-child {
+  margin-left: auto; /* ცენტრში განლაგება პირველი ღილაკისთვის */
+  margin-right: auto;
+}
+.Booking {
+  background-color: white; /* ლურჯი ფონი */
+  color: white; /* თეთრი ტექსტი */
+  padding: 10px 20px; /* padding (ზედა/ქვევით და მარცხნივ/მარჯვნივ) */
+  text-decoration: none; /* ლინკის ქვეშ ხაზი არ იქნება */
+  font-size: 16px; /* ზომა */
+  font-weight: 600; /* წონის გამკაცრება */
+  transition: background-color 0.3s ease; /* ტრანზიცია ჰოვერზე */
+  margin-left: 130px;
+  border: 1px solid black;
+}
+
+.Booking:hover {
+  background-color:  rgb(1,50,32);
+  border: 1px solid white; /* მუქი ლურჯი ფონი ჰოვერზე */
+  color: white;
+}
+.headerimage{
+  border-radius: 50%;
+}
+@media (max-width: 1200px) {
+  .Booking {
+    margin-left: 60px; /* ოდნავ ნაკლები დაშორება დიდ ეკრანებზე */
+    font-size: 15px;
+  }
+
+  .navbar-brand img {
+    width: 45px;
+  }
+}
+
+@media (max-width: 992px) {
+  .Booking {
+    margin-left: 30px;
+    padding: 8px 16px;
+  }
+
+  .navbar {
+    height: auto;
+    padding: 8px 20px;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-nav .nav-item {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+    padding: 5px 15px;
+  }
+
+  .Booking {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    width: 80%;
+  }
+
+  .navbar-brand img {
+    width: 40px;
+  }
+
+  .navbar-nav {
+    margin-top: 15px;
+  }
+
+  .navbar-nav .nav-item {
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    padding: 5px 10px;
+  }
+
+  .navbar-brand img {
+    width: 35px;
+  }
+
+  .Booking {
+    width: 100%;
+    margin: 8px 0;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .navbar a {
+    font-size: 15px;
+  }
+}
+.logo {
+  height: 50px; /* ან რამდენიც გინდა */
+  width: auto;
+}

@@ -1,0 +1,40 @@
+<div class="carousel-container" 
+     (mouseenter)="onMouseEnter()" 
+     (mouseleave)="onMouseLeave()">
+  
+  <div class="carousel-track" 
+       [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+    <div class="carousel-slide" *ngFor="let image of images; let i = index">
+      <img [src]="image" [alt]="'Slide ' + (i + 1)">
+      <div class="slide-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <button class="carousel-btn carousel-btn-prev" 
+          (click)="prev()" 
+          aria-label="Previous slide">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  
+  <button class="carousel-btn carousel-btn-next" 
+          (click)="next()"
+          aria-label="Next slide">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button 
+      *ngFor="let image of images; let i = index"
+      class="indicator"
+      [class.active]="i === currentIndex"
+      [attr.aria-label]="'Go to slide ' + (i + 1)"
+      (click)="goToSlide(i)">
+    </button>
+  </div>
+</div>

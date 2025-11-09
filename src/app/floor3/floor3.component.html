@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class="Mine">ბინები:სართული 4</h1>
+
+  <div class="cards-grid">
+    <div class="card" *ngFor="let card of cardsData; let i = index">
+      <img [src]="card.image" [alt]="card.title" class="card-image">
+      <div class="card-content">
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.shortDescription }}</p>
+        <button class="btn-details" (click)="openModal(card)">დეტალურად ნახვა</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- მოდალი -->
+<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <!-- ← ᲐᲮᲐᲚᲘ: დაემატა touch events -->
+      <img 
+        [src]="selectedCard?.image" 
+        [alt]="selectedCard?.title" 
+        class="modal-image"
+        (wheel)="onImageWheel($event)"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onImageTap($event)"
+        [style.transform]="'scale(' + imageScale + ')'"
+      >
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h2>{{ selectedCard?.title }}</h2>
+      <p>{{ selectedCard?.fullDescription }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.map-container {
+
+  width: 100%;                /* სიგანე ეკრანის სიგანეზე */
+  max-width: 1200px;          /* მაქსიმალური სიგანე */
+  margin: 110px auto 0;        /* ზემოდან 90px დაშორება, ცენტრირება */
+  height: 450px;              /* მთლიანი სიმაღლე */
+  border-radius: 10px;        /* რბილი კუთხეები */
+  overflow: hidden;           
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* მსუბუქი ჩრდილი */
+}
+
+.map-container iframe {
+  width: 100%;     /* სრულად container-ის სიგანეზე */
+  height: 100%;    /* სრულად container-ის სიმაღლეზე */
+  border: 0;
+  display: block;
+}
+
+/* პატარა ეკრანებისთვის */
+@media (max-width: 768px) {
+  .map-container {
+    height: 300px;  /* სიმაღლე პატარა ეკრანზე */
+  }
+}

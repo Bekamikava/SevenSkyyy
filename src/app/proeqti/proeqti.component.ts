@@ -16,6 +16,8 @@ export class ProeqtiComponent implements OnInit, OnDestroy {
 
   currentIndex = 0;
   autoPlayInterval: any;
+  touchStartX = 0;
+  touchEndX = 0;
 
   ngOnInit() {
     this.startAutoPlay();
@@ -63,5 +65,31 @@ export class ProeqtiComponent implements OnInit, OnDestroy {
 
   onMouseLeave() {
     this.startAutoPlay();
+  }
+
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX;
+    this.stopAutoPlay();
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipe();
+    this.startAutoPlay();
+  }
+
+  handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = this.touchStartX - this.touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swipe left - next slide
+        this.next();
+      } else {
+        // Swipe right - previous slide
+        this.prev();
+      }
+    }
   }
 }

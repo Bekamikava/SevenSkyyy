@@ -17,16 +17,20 @@
 <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
-      <!-- ← ᲐᲮᲐᲚᲘ: დაემატა touch events -->
       <img 
         [src]="selectedCard?.image" 
         [alt]="selectedCard?.title" 
         class="modal-image"
+        [class.draggable]="imageScale > 1"
         (wheel)="onImageWheel($event)"
+        (mousedown)="onMouseDown($event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp()"
+        (mouseleave)="onMouseUp()"
         (touchstart)="onTouchStart($event)"
         (touchmove)="onTouchMove($event)"
-        (touchend)="onImageTap($event)"
-        [style.transform]="'scale(' + imageScale + ')'"
+        (touchend)="onTouchEnd($event)"
+        [style.transform]="'scale(' + imageScale + ') translate(' + imageTranslateX + 'px, ' + imageTranslateY + 'px)'"
       >
       <button class="close-btn" (click)="closeModal()">&times;</button>
     </div>

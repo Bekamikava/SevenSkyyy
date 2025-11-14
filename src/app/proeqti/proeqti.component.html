@@ -1,6 +1,8 @@
 <div class="carousel-container" 
      (mouseenter)="onMouseEnter()" 
-     (mouseleave)="onMouseLeave()">
+     (mouseleave)="onMouseLeave()"
+     (touchstart)="onTouchStart($event)"
+     (touchend)="onTouchEnd($event)">
   
   <div class="carousel-track" 
        [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">

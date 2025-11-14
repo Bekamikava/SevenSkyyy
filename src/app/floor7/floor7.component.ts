@@ -7,90 +7,72 @@ import { Component } from '@angular/core';
   styleUrl: './floor7.component.css'
 })
 export class Floor7Component {
-isModalOpen = false;
+ isModalOpen = false;
   selectedCard: any = null;
   imageScale = 1;
 
-  // ← ᲐᲮᲐᲚᲘ: Touch zoom-ისთვის
+  // Pan (drag) ფუნქციისთვის
+  imageTranslateX = 0;
+  imageTranslateY = 0;
+  private isDragging = false;
+  private dragStartX = 0;
+  private dragStartY = 0;
+
+  // Touch zoom-ისთვის
   private lastTouchDistance = 0;
+  
+  // Touch pan (drag) ისთვის
+  private touchDragStartX = 0;
+  private touchDragStartY = 0;
+  private isTouchDragging = false;
 
   cardsData = [
     {
       image: '/assets/Screenshot 2025-10-21 at 11.50.30 AM-page-012.jpg',
       title: 'საერთო ფართი 47.8 მ²',
-      shortDescription:
-        'ერთსაძინებლიანი ბინა ბალკონით. შედგება დიდი საძინებლისგან, დიდი სასტუმრო-სამზარეულოსგან, აივნისა და სველი წერტილისგან.',
-      fullDescription: `მთლიანი ფართი: 47.8მ²
-საძინებელი 1: 11.8მ² - ძალიან ფართო მთავარი საძინებელი, საკმარისი ოთახი დიდი საწოლისა და კარადების მოსათავსებლად
-ცენტრალური სივრცე: 26.9მ² - დიდი სასტუმრო/სამზარეულო ზონა ღია გეგმით.
+      shortDescription: 'ერთსაძინებლიანი ბინა აივნით.\nშედგება სტუდიოს, ერთი საძინებლის, სველი წერტილისა და აივნისგან.',
 
-ბალკონი: 5.5მ² - საკმაოდ დიდი ბალკონი, შესაძლებელია მოწყობა დასასვენებელ ზონად
-სველი წერტილი: 3.6მ² - კომპაქტური აბაზანა ტუალეტით
-უპირატესობები:
-დიდი მთავარი საძინებელი
-ფართო ბალკონი
-გახსნილი გეგმა სასტუმრო-სამზარეულო ზონაში
-ბუნებრივი განათება`
+      fullDescription: `სტუდიო: 26.9 მ²
+საძინებელი: 11.8 მ²
+სველი წერტილი: 3.6 მ²
+აივანი: 5.5 მ²`
 
     },
     {
       image: '/assets/Screenshot 2025-10-21 at 11.50.30 AM-page-013.jpg',
       title: 'საერთო ფართი 56.9 მ²',
-      shortDescription:
-        'ფუნქციური ორსაძინებლიანი ბინა მე-8 სართულზე. გამორჩეული დამატებითი ოთახით და დიდი ცენტრალური სივრცით.',
-       fullDescription: `პირველი საძინებელი: 8.9მ² - კომფორტული საძინებელი
-მეორე საძინებელი: 9.5მ² , თითქმის იგივე ზომის
-ცენტრალური სივრცე: 20.1მ² - დიდი სასტუმრო/სამზარეულო ზონა ღია გეგმით.
-პირველი აივანი:7.7მ²,
-მეორე აივანი: 6.5მ² - ფართო შესასვლელი სივრცე
-სველი წერტილი: 4.2მ² - ფართო აბაზანა;
+      shortDescription: 'ორსაძინებლიანი ბინა აივნებით.\nშედგება სტუდიოს, ორი საძინებლის, სველი წერტილისა და ორი აივნისგან.',
 
-უპირატესობები:
-დიდი ცენტრალური სივრცე
-ორი თითქმის იდენტური საძინებელი
-ფართო აბაზანა`
+       fullDescription: `სტუდიო: 20.1 მ²
+საძინებელი 1: 8.9 მ²
+საძინებელი 2: 9.5 მ²
+სველი წერტილი: 4.2 მ²
+აივანი 1: 7.7 მ²
+აივანი 2: 6.5 მ²`
 
     },
     {
       image: '/assets/Screenshot 2025-10-21 at 11.50.30 AM-page-014.jpg',
       title: 'საერთო ფართი 50.7 მ²',
-      shortDescription:
-        '50.7მ² ფართობის ერთსაძინებლიანი ბინა ბალკონით. იდეალურია წყვილისთვის ან მცირე ოჯახისთვის. ღია გეგმა დიდი სივრცით.',
-      fullDescription: `მთლიანი ფართი: 50.7მ²
-საძინებელი: 11.1მ² - ძალიან დიდი საძინებელი ოთახი, დიდი გარდერობითა და კომფორტული ზონით
-ცენტრალური სივრცე: 25.1მ² - დიდი სასტუმრო/სამზარეულო ზონა ღია გეგმით.
-ბალკონი: 8.2მ² - დიდი ბალკონი, შესაძლებელია მოწყობა როგორც დასასვენებელი ზონა
-სველი წერტილი: 5.9მ² - კომფორტული აბაზანა ყველა საჭირო ელემენტით
+      shortDescription: 'ერთსაძინებლიანი ბინა აივნით.\nშედგება სტუდიოს, ერთი საძინებლის, სველი წერტილისა და აივნისგან.',
 
-უპირატესობები:
-ძალიან დიდი საძინებელი ოთახი
-ფართო ბალკონი მშვენიერი ხედებით
-დიდი აბაზანა
-ღია გეგმის დიზაინი
-ოპტიმალური განლაგება`
+      fullDescription: `სტუდიო: 25.1 მ²
+საძინებელი: 11.1 მ²
+სველი წერტილი: 5.9 მ²
+აივანი: 8.2 მ²`
 
     },
     {
       image: '/assets/Screenshot 2025-10-21 at 11.50.30 AM-page-015.jpg',
       title: 'საერთო ფართი 82.7 მ²',
-      shortDescription:
-        '82.7მ² ფართობის სამმოთახიანი ბინა დიდი ბალკონებით. ყველაზე დიდი და ფუნქციური განლაგება კორპუსში.',
-     fullDescription: `მთლიანი ფართი: 82.7მ²
-ცენტრალური სივრცე: 34.9მ² - ძალიან დიდი სასტუმრო-სამზარეულო ზონა ღია გეგმით.
-საძინებელი 1: 14.0მ² - დიდი საძინებელი.
-საძინებელი 2: 13.6მ² - თითქმის იდენტური ზომის მეორე საძინებელი.
-ბალკონი 1: 7.6მ² - დიდი ბალკონი.
-ბალკონი 2: 7.7მ² - მეორე დიდი ბალკონი.
-სველი წერტილი: 4.9მ² - ფართო აბაზანა.
+      shortDescription: 'ორსაძინებლიანი ბინა აივნებით.\nშედგება სტუდიოს, ორი საძინებლის, სველი წერტილისა და ორი აივნისგან.',
 
-უპირატესობები:
-უდიდესი ფართი კოლექციაში
-ორი დიდი ბალკონი
-ორი თანაბარი საძინებელი
-ძალიან დიდი სასტუმრო-სამზარეულო ზონა
-იდეალურია დიდი ოჯახისთვის
-შესაძლებელია მესამე საძინებლის მოწყობა
-ფუნქციური განლაგება`
+     fullDescription: `სტუდიო: 34.9 მ²
+საძინებელი 1: 14.0 მ²
+საძინებელი 2: 13.6 მ²
+სველი წერტილი: 4.9 მ²
+აივანი 1: 7.6 მ²
+აივანი 2: 7.7 მ²`
 
 
     },
@@ -106,38 +88,72 @@ isModalOpen = false;
   closeModal(): void {
     this.isModalOpen = false;
     this.imageScale = 1;
+    this.imageTranslateX = 0;
+    this.imageTranslateY = 0;
+    this.isDragging = false;
+    this.isTouchDragging = false;
   }
 
   // Desktop: Mouse wheel zoom
   onImageWheel(event: WheelEvent): void {
-  event.preventDefault();
+    event.preventDefault();
 
-  const img = event.target as HTMLElement;
+    const img = event.target as HTMLElement;
 
-  // მაუსის პოზიცია ელემენტის შიგნით
-  const rect = img.getBoundingClientRect();
-  const offsetX = ((event.clientX - rect.left) / rect.width) * 100;
-  const offsetY = ((event.clientY - rect.top) / rect.height) * 100;
+    // მაუსის პოზიცია ელემენტის შიგნით
+    const rect = img.getBoundingClientRect();
+    const offsetX = ((event.clientX - rect.left) / rect.width) * 100;
+    const offsetY = ((event.clientY - rect.top) / rect.height) * 100;
 
-  // დინამიურად ვცვლით transform-origin-ს
-  img.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+    // დინამიურად ვცვლით transform-origin-ს
+    img.style.transformOrigin = `${offsetX}% ${offsetY}%`;
 
-  // ზუმის სიჩქარე
-  const delta = event.deltaY * -0.001;
-  this.imageScale = Math.min(Math.max(0.5, this.imageScale + delta), 4);
-}
+    // ზუმის სიჩქარე
+    const delta = event.deltaY * -0.001;
+    this.imageScale = Math.min(Math.max(0.5, this.imageScale + delta), 4);
+  }
 
-  // ← ᲐᲮᲐᲚᲘ: Mobile: Touch start (pinch დაწყება)
-  onTouchStart(event: TouchEvent): void {
-    if (event.touches.length === 2) {
+  // Mouse drag to pan
+  onMouseDown(event: MouseEvent): void {
+    if (this.imageScale > 1) {
+      this.isDragging = true;
+      this.dragStartX = event.clientX - this.imageTranslateX;
+      this.dragStartY = event.clientY - this.imageTranslateY;
       event.preventDefault();
-      this.lastTouchDistance = this.getTouchDistance(event);
     }
   }
 
-  // ← ᲐᲮᲐᲚᲘ: Mobile: Touch move (pinch zoom)
+  onMouseMove(event: MouseEvent): void {
+    if (this.isDragging) {
+      this.imageTranslateX = event.clientX - this.dragStartX;
+      this.imageTranslateY = event.clientY - this.dragStartY;
+      event.preventDefault();
+    }
+  }
+
+  onMouseUp(): void {
+    this.isDragging = false;
+  }
+
+  // Mobile: Touch start (pinch დაწყება + drag დაწყება)
+  onTouchStart(event: TouchEvent): void {
+    if (event.touches.length === 2) {
+      // Pinch zoom
+      event.preventDefault();
+      this.lastTouchDistance = this.getTouchDistance(event);
+      this.isTouchDragging = false;
+    } else if (event.touches.length === 1 && this.imageScale > 1) {
+      // Single touch drag (როცა zoom-ია)
+      this.isTouchDragging = true;
+      this.touchDragStartX = event.touches[0].clientX - this.imageTranslateX;
+      this.touchDragStartY = event.touches[0].clientY - this.imageTranslateY;
+    }
+  }
+
+  // Mobile: Touch move (pinch zoom + drag)
   onTouchMove(event: TouchEvent): void {
     if (event.touches.length === 2) {
+      // Pinch zoom
       event.preventDefault();
 
       const currentDistance = this.getTouchDistance(event);
@@ -145,10 +161,25 @@ isModalOpen = false;
 
       this.imageScale = Math.min(Math.max(0.5, this.imageScale + delta), 4);
       this.lastTouchDistance = currentDistance;
+    } else if (event.touches.length === 1 && this.isTouchDragging && this.imageScale > 1) {
+      // Single touch drag
+      event.preventDefault();
+      this.imageTranslateX = event.touches[0].clientX - this.touchDragStartX;
+      this.imageTranslateY = event.touches[0].clientY - this.touchDragStartY;
     }
   }
 
-  // ← ᲐᲮᲐᲚᲘ: Touch distance გამოთვლა (2 თითს შორის)
+  // Touch end
+  onTouchEnd(event: TouchEvent): void {
+    if (event.touches.length < 2) {
+      this.isTouchDragging = false;
+    }
+    
+    // Double tap zoom
+    this.onImageTap(event);
+  }
+
+  // Touch distance გამოთვლა (2 თითს შორის)
   private getTouchDistance(event: TouchEvent): number {
     const touch1 = event.touches[0];
     const touch2 = event.touches[1];
@@ -159,7 +190,7 @@ isModalOpen = false;
     return Math.sqrt(dx * dx + dy * dy);
   }
 
-  // ← ᲐᲮᲐᲚᲘ: Double tap zoom (ალტერნატივა)
+  // Double tap zoom (ალტერნატივა)
   private lastTapTime = 0;
   onImageTap(event: TouchEvent): void {
     const currentTime = new Date().getTime();

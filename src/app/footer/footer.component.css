@@ -7,7 +7,20 @@
   overflow: hidden;
   box-shadow: 0 -4px 20px rgba(139, 122, 82, 0.08);
 }
+.modal-image {
+  transition: none; /* რომ დრეგისას smooth იყოს */
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none; /* ← მნიშვნელოვანი mobile-ისთვის */
+}
 
+.modal-image.draggable {
+  cursor: grab;
+}
+
+.modal-image.draggable:active {
+  cursor: grabbing;
+}
 .footer::before {
   content: "";
   position: absolute;
@@ -86,6 +99,8 @@
   margin-bottom: 2rem;
   line-height: 1.8;
   font-size: 0.98rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .address,
@@ -99,6 +114,15 @@
   transition: all 0.3s ease;
   padding: 0.5rem;
   border-radius: 8px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.address span,
+.contact span {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .address:hover,
@@ -115,6 +139,7 @@
   margin-top: 2px;
   opacity: 0.7;
   stroke: #8b7a52;
+  min-width: 22px;
 }
 
 .social-description {
@@ -205,6 +230,7 @@
   color: #7a6b5d;
   font-size: 0.92rem;
   letter-spacing: 0.5px;
+  word-wrap: break-word;
 }
 
 /* დეკორატიული ფოთლები */
@@ -252,25 +278,42 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .footer {
-    padding: 4rem 0 1.5rem;
+    padding: 3rem 1rem 1.5rem;
   }
 
   .footer-container {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 
   .footer-content {
     grid-template-columns: 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .footer-section h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .footer-section h4 {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
+  }
+
+  .company-description {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .address,
+  .contact {
+    font-size: 0.9rem;
+    gap: 0.8rem;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
   }
 
   .social-links {
@@ -279,53 +322,8 @@
 }
 
 @media (max-width: 480px) {
-  .footer-container {
-    padding: 0 1.2rem;
-  }
-
   .footer {
-    padding: 3rem 0 1.2rem;
-  }
-
-  .footer-section h3 {
-    font-size: 1.35rem;
-  }
-
-  .social-link {
-    width: 48px;
-    height: 48px;
-  }
-
-  .social-link svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .copyright {
-    font-size: 0.88rem;
-  }
-
-  .footer-content {
-    gap: 2.5rem;
-  }
-
-  .leaf {
-    font-size: 1.5rem;
-  }
-}
-
-/* Smooth Animations */
-@media (prefers-reduced-motion: no-preference) {
-  .social-link,
-  .address,
-  .contact {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-}
-/* 320px-ისთვის დამატებითი responsive */
-@media (max-width: 360px) {
-  .footer {
-    padding: 2rem 0 1rem;
+    padding: 2.5rem 0.8rem 1.2rem;
   }
 
   .footer-container {
@@ -333,32 +331,97 @@
   }
 
   .footer-section h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .footer-section h4 {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .company-description {
-    font-size: 0.75rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.6;
   }
 
   .address,
   .contact {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     gap: 0.7rem;
+    padding: 0.4rem;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+  }
+
+  .social-link {
+    width: 46px;
+    height: 46px;
+  }
+
+  .social-link svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .copyright {
+    font-size: 0.82rem;
+  }
+
+  .footer-content {
+    gap: 2rem;
+  }
+
+  .leaf {
+    font-size: 1.5rem;
+  }
+}
+
+/* 360px-ისთვის */
+@media (max-width: 360px) {
+  .footer {
+    padding: 2rem 0.5rem 1rem;
+  }
+
+  .footer-container {
+    padding: 0 0.5rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-section h4 {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .company-description {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .address,
+  .contact {
+    font-size: 0.78rem;
+    gap: 0.6rem;
     padding: 0.3rem;
+    margin-bottom: 1rem;
   }
 
   .icon {
     width: 16px;
     height: 16px;
+    min-width: 16px;
   }
 
   .social-description {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    margin-bottom: 1.2rem;
   }
 
   .social-link {
@@ -372,15 +435,16 @@
   }
 
   .copyright {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
   }
 
   .footer-content {
-    gap: 1.8rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .leaf {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .footer-section h3::after,
@@ -389,6 +453,77 @@
   }
 
   .social-links {
-    gap: 1rem;
+    gap: 0.8rem;
+  }
+
+  .divider {
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+  }
+}
+
+/* 320px და ნაკლები */
+@media (max-width: 320px) {
+  .footer {
+    padding: 1.5rem 0.4rem 0.8rem;
+  }
+
+  .footer-container {
+    padding: 0 0.4rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1rem;
+  }
+
+  .footer-section h4 {
+    font-size: 0.9rem;
+  }
+
+  .company-description {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .address,
+  .contact {
+    font-size: 0.72rem;
+    gap: 0.5rem;
+  }
+
+  .icon {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+  }
+
+  .social-link {
+    width: 38px;
+    height: 38px;
+  }
+
+  .social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .copyright {
+    font-size: 0.7rem;
+  }
+
+  .social-links {
+    gap: 0.7rem;
+  }
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .social-link,
+  .address,
+  .contact {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }

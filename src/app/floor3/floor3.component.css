@@ -341,7 +341,20 @@ h1 {
   /* ← ᲐᲮᲐᲚᲘ: smooth scrolling mobile-ზე */
   -webkit-overflow-scrolling: touch;
 }
+.modal-image {
+  transition: none; /* რომ დრეგისას smooth იყოს */
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none; /* ← მნიშვნელოვანი mobile-ისთვის */
+}
 
+.modal-image.draggable {
+  cursor: grab;
+}
+
+.modal-image.draggable:active {
+  cursor: grabbing;
+}
 /* ← ᲐᲮᲐᲚᲘ: Mobile zoom hint */
 @media (max-width: 768px) {
   .modal-image::after {

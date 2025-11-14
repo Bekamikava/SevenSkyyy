@@ -5,7 +5,20 @@
   padding: 0;
   box-sizing: border-box;
 }
+.modal-image {
+  transition: none; /* რომ დრეგისას smooth იყოს */
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none; /* ← მნიშვნელოვანი mobile-ისთვის */
+}
 
+.modal-image.draggable {
+  cursor: grab;
+}
+
+.modal-image.draggable:active {
+  cursor: grabbing;
+}
 :host {
     margin-top: 65px;
   display: block;
